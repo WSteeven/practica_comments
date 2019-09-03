@@ -1,0 +1,64 @@
+<% include _header %>
+
+<!--Formulario de publicación-->
+<div class="row">
+    <div class="col-3"></div>
+    <div class="card col-6">
+        <div class="card-header  bg-dark">
+            <h5 class="card-title text-white"><i class="fas fa-edit"></i> Crear publicación</h5>
+        </div>
+        <div class="card-body">
+            <form action="/publicationadd" method="POST" enctype="multipart/form-data">
+                <div class="form-group">
+                    <textarea name="text" id="text" rows="3" class="form-control" placeholder="¿En qué estás pensando?"
+                        required></textarea>
+                </div>
+                <div class="form-group">
+                    <input type="file" name="imagen" id="imagen">
+                </div>
+                <div class="form-group">
+                    <button class="btn btn-success"><i class="fas fa-upload"></i> Publicar</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+
+<div class="row mt-4">
+
+    <% for(var i=0; i<publications.length; i++) { %>
+    <div class="col-3"></div>
+    <div class="card col-6 mt-3">
+        <div class="card-header">
+            <button class="btn btn-danger"><i class="fa fa-times"></i> Borrar publicación</button>
+        </div>
+        <div class="card-body">
+            <p><%= publications[i].text%></p>
+            <div>
+                <% if(publications[i].file!==null) {%>
+                <img src="/public/img/<%=publications[i].file%>" alt="" class="img-fluid">
+                <% } %>
+            </div>
+        </div>
+        <div class="card-footer d-flex justify-content-between align-items-center">
+            <button class="btn btn-success" id="btn-like">
+                <i class="fas fa-thumbs-up"></i>
+            </button>
+            <p><span class="likes-count"></span></p><i class="fas fa-thumbs-up"></i>
+            <p><i class="fas fa-eye"></i></p>
+            <p id="tiempo"><i class="far fa-clock"></i><%= publications[i].created_at %></p>
+        </div>
+    </div>
+    <div class="col-3"></div>
+    <% } %>
+</div>
+<script>
+function convertirHora(horaUnix){
+    var date = new Date(horaUnix*1000);
+    var horas = date.getHours();
+    var minutos = date.getMinutes();
+    var segundos = date.getSeconds();
+    
+}
+</script>
+<% include _footer %>
